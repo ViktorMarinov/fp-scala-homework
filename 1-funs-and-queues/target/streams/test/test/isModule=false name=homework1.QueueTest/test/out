@@ -1,0 +1,3 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mQueueTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32man empty queue[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should produce a queue with a single element when that element is added to it[0m[0m

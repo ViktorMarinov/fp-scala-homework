@@ -1,0 +1,35 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mFunctionsTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mfromDigits[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should form a decimal number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should form a hex number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mparseInteger[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should parse a decimal number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should parse a hex number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mzipMap[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- should transform two lists *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  scala.NotImplementedError: an implementation is missing[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.Predef$.$qmark$qmark$qmark(Predef.scala:284)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at homework1.Functions$.zipMap(Functions.scala:20)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at homework1.FunctionsTest.$anonfun$new$5(FunctionsTest.scala:24)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:22)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:20)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.FlatSpecLike$$anon$1.apply(FlatSpecLike.scala:1682)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mcountCoinChangeVariants[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- should count the ways to give a change *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  scala.NotImplementedError: an implementation is missing[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.Predef$.$qmark$qmark$qmark(Predef.scala:284)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at homework1.Functions$.countCoinChangeVariants(Functions.scala:22)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at homework1.FunctionsTest.$anonfun$new$7(FunctionsTest.scala:28)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:22)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:20)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.FlatSpecLike$$anon$1.apply(FlatSpecLike.scala:1682)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
