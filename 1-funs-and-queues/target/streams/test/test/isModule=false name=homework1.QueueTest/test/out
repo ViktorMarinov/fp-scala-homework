@@ -1,3 +1,12 @@
 [0m[[0m[0minfo[0m] [0m[0m[32mQueueTest:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32man empty queue[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should produce a queue with a single element when that element is added to it[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be immutable[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mconstructors[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should put the elements in the same order[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mpeek[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return the top element[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should throw NoSuchElementException if the queue is empty[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mpop[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should shoud return the old queue without the first element[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should throw NoSuchElementException if the queue is empty[0m[0m

@@ -2,12 +2,18 @@
 [0m[[0m[0minfo[0m] [0m[0m[32mfromDigits[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should form a decimal number[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should form a hex number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should form a binary number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be able to form a number with radix 35[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mparseInteger[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should parse a decimal number[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should parse a hex number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should parse a binary number[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should not be affected by leading zeroes[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mzipMap[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should transform two lists[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should be able to work with different length lists[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mcountCoinChangeVariants[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should count the ways to give a change[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should return 0 if the change is smaller than all the coins[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mbfsTraversal[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should give the traversed path[0m[0m

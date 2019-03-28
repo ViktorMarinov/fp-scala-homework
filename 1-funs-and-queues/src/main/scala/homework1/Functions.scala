@@ -20,7 +20,7 @@ object Functions {
     if (c.isDigit) c - '0' else 10 + c - 'A'
 
   def zipMap(a: List[Int], b: List[Int], f: (Int, Int) => Int): List[Int] =
-    a.zip(b).map(f.tupled)
+    a zip b map f.tupled
 
   def countCoinChangeVariants(denominations: List[Int], change: Int): Int = {
     def loop(denominations: List[Int], change: Int): Int =
@@ -41,19 +41,20 @@ object Functions {
   }
 
   def bfsTraversal(start: Int, end: Int, neighbours: Int => List[Int]): Queue = {
-    def loop(queue: Queue, visited: List[Int] = List.empty): List[Int]  = {
+    def loop(queue: Queue, visited: Set[Int] = Set.empty, path: Queue = Queue.empty): Queue  = {
       val value = queue.peek
-      val updatedVisited = value :: visited
+      val updatedVisited = visited + value
+      val updatedPath = path.push(value)
 
       if (value == end)
-        updatedVisited.reverse
+        updatedPath
       else {
         val nextNodes = neighbours(value).filter(!visited.contains(_))
-        loop(queue.pop.extend(nextNodes), updatedVisited)
+        loop(queue.pop.extend(nextNodes), updatedVisited ++ nextNodes, updatedPath)
       }
     }
 
-    return Queue(loop(Queue.empty.push(start)))
+    return loop(Queue.of(start))
   }
 }
 

@@ -1,7 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/viktor/git/fp-scala-homework/1-funs-and-queues/src/main/scala/homework1/Queue.scala:23:7: double definition:[0m
-[0m[[0m[31merror[0m] [0m[0mdef apply(xs: Seq[Int]): homework1.Queue at line 21 and[0m
-[0m[[0m[31merror[0m] [0m[0mdef apply(xs: Int*): homework1.Queue at line 23[0m
-[0m[[0m[31merror[0m] [0m[0mhave same type after erasure: (xs: Seq)homework1.Queue[0m
-[0m[[0m[31merror[0m] [0m[0m  def apply(xs: Int*): Queue = new Queue(xs)[0m
-[0m[[0m[31merror[0m] [0m[0m      ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/viktor/git/fp-scala-homework/1-funs-and-queues/src/main/scala/homework1/Functions.scala:43:73: homework1.Queue does not take type parameters[0m
+[0m[[0m[31merror[0m] [0m[0m  def bfsTraversal(start: Int, end: Int, neighbours: Int => List[Int]): Queue[Int] = {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/viktor/git/fp-scala-homework/1-funs-and-queues/src/main/scala/homework1/Functions.scala:44:21: homework1.Queue does not take type parameters[0m
+[0m[[0m[31merror[0m] [0m[0m    def loop(queue: Queue[Int], visited: List[Int] = List.empty): List[Int]  = {[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
