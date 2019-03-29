@@ -2,7 +2,6 @@ package homework1
 
 import scala.annotation.tailrec
 
-
 object Functions {
   def fromDigits(digits: List[Int], radix: Int = 10): Int =
     digits.reverse.zipWithIndex.map {
@@ -32,11 +31,8 @@ object Functions {
             case `change`        => 1
             case n if n > change => 0
             case n if n < change =>
-              loop(
-                denominations.filter(d => d >= denom),
-                change - n
-              )
-          })
+              loop(denominations.filter(_ >= denom), change - n)
+        })
         .sum
 
     loop(denominations.distinct.sorted, change)
@@ -44,7 +40,7 @@ object Functions {
 
   def bfsTraversal(start: Int, end: Int, neighbours: Int => List[Int]): Queue[Int] = {
     @tailrec
-    def loop(queue: Queue[Int], visited: Set[Int], traversed: Queue[Int]): Queue[Int]  = {
+    def loop(queue: Queue[Int],visited: Set[Int], traversed: Queue[Int]): Queue[Int] = {
       val nextNodes = queue.flatMap(neighbours).filterNot(visited.contains).toSeq.distinct
 
       if (nextNodes.isEmpty)
@@ -62,15 +58,3 @@ object Functions {
       loop(startQueue, Set(start), startQueue)
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
