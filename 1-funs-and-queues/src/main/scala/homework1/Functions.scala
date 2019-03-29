@@ -1,5 +1,7 @@
 package homework1
 
+import scala.annotation.tailrec
+
 
 object Functions {
   def fromDigits(digits: List[Int], radix: Int = 10): Int =
@@ -40,21 +42,24 @@ object Functions {
     loop(denominations.distinct.sorted, change)
   }
 
-  def bfsTraversal(start: Int, end: Int, neighbours: Int => List[Int]): Queue = {
-    def loop(queue: Queue, visited: Set[Int] = Set.empty, path: Queue = Queue.empty): Queue  = {
-      val value = queue.peek
-      val updatedVisited = visited + value
-      val updatedPath = path.push(value)
+  def bfsTraversal(start: Int, end: Int, neighbours: Int => List[Int]): Queue[Int] = {
+    @tailrec
+    def loop(queue: Queue[Int], visited: Set[Int], traversed: Queue[Int]): Queue[Int]  = {
+      val nextNodes = queue.flatMap(neighbours).filterNot(visited.contains).toSeq.distinct
 
-      if (value == end)
-        updatedPath
-      else {
-        val nextNodes = neighbours(value).filter(!visited.contains(_))
-        loop(queue.pop.extend(nextNodes), updatedVisited ++ nextNodes, updatedPath)
-      }
+      if (nextNodes.isEmpty)
+        traversed
+      else if (nextNodes.exists(_ == end))
+        traversed.extend(nextNodes.takeWhile(_ != end)).push(end)
+      else
+        loop(Queue(nextNodes), visited ++ nextNodes, traversed.extend(nextNodes))
     }
 
-    return loop(Queue.of(start))
+    val startQueue = Queue.of(start)
+    if (start == end)
+      startQueue
+    else
+      loop(startQueue, Set(start), startQueue)
   }
 }
 

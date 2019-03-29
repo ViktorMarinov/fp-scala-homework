@@ -59,7 +59,7 @@ class FunctionsTest extends FlatSpec with Matchers {
   }
 
   "bfsTraversal" should "give the traversed path" in {
-    val graph = (i: Int) => i match {
+    val graph: Int => List[Int] = {
       case 1 => List(2, 5, 8)
       case 2 => List(1, 3, 6)
       case 3 => List(2, 4)
@@ -75,5 +75,15 @@ class FunctionsTest extends FlatSpec with Matchers {
     bfsTraversal(1, 2, graph).toSeq shouldBe Seq(1, 2)
     bfsTraversal(1, 5, graph).toSeq shouldBe Seq(1, 2, 5)
     bfsTraversal(1, 9, graph).toSeq shouldBe Seq(1, 2, 5, 8, 3, 6, 9)
+    bfsTraversal(1, 1, graph).toSeq shouldBe Seq(1)
+  }
+
+  it should "work when there is no path found" in {
+    val graph: Int => List[Int] = {
+      case 1 => List(2, 3)
+      case _ => Nil
+    }
+
+    bfsTraversal(1, 4, graph).toSeq shouldBe Seq(1, 2, 3)
   }
 }

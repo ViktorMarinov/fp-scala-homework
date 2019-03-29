@@ -17,3 +17,4 @@
 [0m[[0m[0minfo[0m] [0m[0m[32m- should return 0 if the change is smaller than all the coins[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mbfsTraversal[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should give the traversed path[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should work when there is no path found[0m[0m
