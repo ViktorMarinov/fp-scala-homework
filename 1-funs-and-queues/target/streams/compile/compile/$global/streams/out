@@ -1,7 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/viktor/git/fp-scala-homework/1-funs-and-queues/src/main/scala/homework1/Functions.scala:43:73: homework1.Queue does not take type parameters[0m
-[0m[[0m[31merror[0m] [0m[0m  def bfsTraversal(start: Int, end: Int, neighbours: Int => List[Int]): Queue[Int] = {[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/viktor/git/fp-scala-homework/1-funs-and-queues/src/main/scala/homework1/Functions.scala:44:21: homework1.Queue does not take type parameters[0m
-[0m[[0m[31merror[0m] [0m[0m    def loop(queue: Queue[Int], visited: List[Int] = List.empty): List[Int]  = {[0m
-[0m[[0m[31merror[0m] [0m[0m                    ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
