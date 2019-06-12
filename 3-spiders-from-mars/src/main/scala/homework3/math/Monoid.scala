@@ -83,10 +83,16 @@ object Monoid {
   }
 
   implicit def fileOutputMonoid = new Monoid[SavedFiles] {
-    import ops._
+    def op(a: SavedFiles, b: SavedFiles): SavedFiles = {
+      import ops._
 
-    def op(a: SavedFiles, b: SavedFiles): SavedFiles =
-      SavedFiles(a.urlToPath |+| b.urlToPath)
+      val urlToPath = (a.urlToPath.keySet |+| b.urlToPath.keySet).map { key =>
+        key -> (a.urlToPath.getOrElse(key, b.urlToPath(key)))
+      }.toMap
+
+      SavedFiles(urlToPath)
+    }
+
 
     def identity: SavedFiles = SavedFiles(Map.empty)
   }

@@ -4,7 +4,7 @@ import homework3.Processor
 import homework3.html.HtmlUtils
 import homework3.http.{ContentType, HttpResponse}
 
-import scala.concurrent.Future
+import scala.concurrent.{Future, Promise}
 
 case class WordCount(wordToCount: Map[String, Int])
 
@@ -20,13 +20,13 @@ object WordCount {
 }
 
 object WordCounter extends Processor[WordCount] {
-  def apply(url: String, response: HttpResponse): Future[WordCount] = Future {
+  def apply(url: String, response: HttpResponse): Future[WordCount] = Promise[WordCount].success {
     if (response.isSuccess) {
       WordCount.fromText(getText(response))
     } else {
       WordCount(Map.empty)
     }
-  }
+  }.future
 
   private def getText(httpResponse: HttpResponse) =
     httpResponse.contentType match {
