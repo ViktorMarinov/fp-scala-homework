@@ -1,4 +1,4 @@
-package homework3
+package homework3.helpers
 
 import homework3.html.HtmlUtils
 import homework3.http.{ContentType, HttpResponse, HttpUtils}

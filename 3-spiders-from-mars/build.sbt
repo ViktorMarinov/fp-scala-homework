@@ -8,7 +8,8 @@ libraryDependencies ++= Seq(
   "org.asynchttpclient" % "async-http-client" % "2.8.1",
   "org.jsoup" % "jsoup" % "1.12.1",
 
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.5" % "test",
+  "org.scalamock" %% "scalamock-scalatest-support" % "3.6.0" % Test
 )
 
 assemblyMergeStrategy in assembly := {

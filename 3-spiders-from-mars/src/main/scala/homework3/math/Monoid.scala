@@ -82,7 +82,7 @@ object Monoid {
     def identity: WordCount = WordCount(Map.empty)
   }
 
-  implicit def fileOutputMonoid = new Monoid[SavedFiles] {
+  implicit def savedFilesMonoid = new Monoid[SavedFiles] {
     def op(a: SavedFiles, b: SavedFiles): SavedFiles = {
       import ops._
 

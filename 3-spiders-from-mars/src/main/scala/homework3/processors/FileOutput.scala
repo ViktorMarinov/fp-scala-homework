@@ -27,6 +27,6 @@ class FileOutput(targetDir: String)
   def apply(url: String, response: HttpResponse): Future[SavedFiles] = Future {
     val path = Files.write(generatePathFor(url), response.bodyAsBytes)
 
-    SavedFiles(Map(path.toString -> path))
+    SavedFiles(Map(url -> path))
   }
 }

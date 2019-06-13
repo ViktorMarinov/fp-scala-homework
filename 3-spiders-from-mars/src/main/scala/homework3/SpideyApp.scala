@@ -55,8 +55,8 @@ object SpideyApp {
       val maxDepth = 1
 
 //      val processor = WordCounter
-      val processor = BrokenLinkDetector
-//      val processor = new FileOutput("/Users/viksata/temp")(blockingExecutionContext)
+//      val processor = BrokenLinkDetector
+      val processor = new FileOutput("/tmp/3-spiders-from-mars")(blockingExecutionContext)
 
 
       // run Spidey
