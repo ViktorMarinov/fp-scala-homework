@@ -2,12 +2,13 @@ package homework3.helpers
 
 import homework3.Mocks
 import homework3.html.HtmlUtils
+import homework3.http.HttpResponse
 import org.scalatest.{FlatSpec, Matchers}
 
 class LinkExtractorTest extends FlatSpec with Matchers{
   val url = "http://www.example.com"
-  val linkExtractor = LinkExtractor.htmlLinkExtractor(false)(url)
-  val sameDomainExtractor = LinkExtractor.htmlLinkExtractor(true)(url)
+  val linkExtractor = LinkExtractor.default(url, _: HttpResponse)
+  val sameDomainExtractor = LinkExtractor.sameDomainLinkExtractor(url, _: HttpResponse)
 
   "linkExtractor" should "return empty list for non-html responses" in {
     linkExtractor(Mocks.pngResponse) shouldEqual Nil

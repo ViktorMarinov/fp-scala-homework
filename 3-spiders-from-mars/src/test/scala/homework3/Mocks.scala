@@ -1,14 +1,53 @@
 package homework3
 
-import homework3.http.{ContentType, HttpResponse}
+import homework3.http.{ContentType, HttpClient, HttpResponse}
+
+import scala.concurrent.Future
 
 object Mocks {
+
+  def httpClient(urlToResponse: PartialFunction[String, Future[HttpResponse]]) =  new HttpClient {
+    def get(url: String): Future[HttpResponse] = urlToResponse(url)
+  }
+
+  def successfullHttpClient(urlToResponse: PartialFunction[String, HttpResponse]) = new HttpClient {
+    def get(url: String): Future[HttpResponse] = Future.successful(urlToResponse(url))
+  }
+
+  def successfullResponseWithLinks(links: String*) =
+    Future.successful(makeResponseWithLinks(links:_*))
+
+  def makeResponseWithLinks(links: String*) = new HttpResponse {
+    override def headers: Map[String, String] = ???
+
+    override def bodyAsBytes: Array[Byte] = ???
+
+    override def status: Int = 200
+
+    override def body: String = {
+      val hrefs = links.map(link => "<a href=\"" + link + "\" />").mkString("\n")
+      s"""
+         |<html>
+         | <body>
+         |   <div>
+         |     $hrefs
+         |   </div>
+         | </body>
+         |</html>
+      """.stripMargin
+    }
+
+    override def contentType: Option[ContentType] =
+      Some(ContentType(ContentType.Html, None))
+  }
+
   val notFoundResponse = new HttpResponse {
     override def headers: Map[String, String] = ???
 
     override def bodyAsBytes: Array[Byte] = ???
 
     override def status: Int = 404
+    override def contentType: Option[ContentType] = None
   }
 
   val okResponse = new HttpResponse {
@@ -87,6 +126,12 @@ object Mocks {
 
     override def contentType: Option[ContentType] =
       Some(ContentType(ContentType.Html, None))
+  }
+
+  val serverErrorResponse = new HttpResponse {
+    override def status: Int = 500
+    override def headers: Map[String, String] = Map.empty
+    override def bodyAsBytes: Array[Byte] = Array.emptyByteArray
   }
 
   def responseWithSameDomainLinks(domain: String) = new HttpResponse {

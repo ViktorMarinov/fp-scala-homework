@@ -1,6 +1,6 @@
 package homework3.math
 
-import homework3.processors.{FileOutput, SavedFiles, WordCount}
+import homework3.processors.{FileOutput, SavedFiles, StatusCodeCount, WordCount}
 
 trait Monoid[M] {
   def op(a: M, b: M): M
@@ -95,5 +95,14 @@ object Monoid {
 
 
     def identity: SavedFiles = SavedFiles(Map.empty)
+  }
+
+  implicit def statusCodeCountMonoid = new Monoid[StatusCodeCount] {
+    import ops._
+
+    def op(a: StatusCodeCount, b: StatusCodeCount): StatusCodeCount =
+      StatusCodeCount(a.codeToCount |+| b.codeToCount)
+
+    def identity: StatusCodeCount = StatusCodeCount(Map.empty)
   }
 }

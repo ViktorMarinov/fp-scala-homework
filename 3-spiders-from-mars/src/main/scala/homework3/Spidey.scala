@@ -14,11 +14,6 @@ case class SpideyConfig(maxDepth: Int,
 
 class Spidey(httpClient: HttpClient)(implicit ex: ExecutionContext) {
 
-  def resultGetter[O](processor: Processor[O])(urlResponse: Future[UrlResponse]): Future[O] =
-    urlResponse.flatMap {
-      case UrlResponse(url, response) => processor(url, response)
-    }
-
   def crawl[O: Monoid](url: String, config: SpideyConfig)
                       (processor: Processor[O]): Future[O] = {
 
@@ -26,22 +21,18 @@ class Spidey(httpClient: HttpClient)(implicit ex: ExecutionContext) {
       throw new IllegalArgumentException("Provided url is not a valid http link.")
     }
 
-    val linkExtractor = LinkExtractor.htmlLinkExtractor(config.sameDomainOnly) _
-    val urlProcessor: UrlProcessor[O] = new UrlProcessor[O](httpClient, config.retriesOnError)
-    val resultGetter: ResultGetter[O] = if (config.tolerateErrors) {
-      new TolerantResultGetter[O](processor)
-    } else {
-      ResultGetter.defaultResultGetter(processor)
-    }
+    val linkExtractor = LinkExtractor.create(config)
+    val urlToResponse: UrlToResponse = UrlToResponse.create(httpClient, config)
+    val responseToResult: ResponseToResult[O] = ResponseToResult.create(processor, config)
 
     def crawlRec(urls: Seq[String], maxDepth: Int, visited: Set[String]): Future[Seq[O]] = {
-      val futureResponses = urls.map(urlProcessor.process)
+      val futureResponses = urls.map(urlToResponse.apply)
 
-      val futureResults = futureResponses.map(resultGetter.apply)
+      val futureResults = futureResponses.map(responseToResult.apply)
 
       val nextLevelResults = if (maxDepth > 0) {
         val nextLevelLinks = futureResponses.map(_.map {
-          case UrlResponse(url, response) => linkExtractor(url)(response)
+          case UrlResponse(url, response) => linkExtractor(url, response)
         })
 
         Future.sequence(nextLevelLinks)
