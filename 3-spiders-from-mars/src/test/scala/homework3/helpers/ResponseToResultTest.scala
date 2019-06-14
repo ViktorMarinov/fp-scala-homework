@@ -24,7 +24,7 @@ class ResponseToResultTest extends AsyncFlatSpec with Matchers {
   "defaultResponseToResult" should "simply apply the processor" in {
     val urlResponse = UrlResponse(domain, response)
     responseToResult.apply(Future.successful(urlResponse))
-        .map(_.codeToCount)
+        .map(_.result.codeToCount)
         .map{ counts =>
           counts.size shouldBe 1
           counts(200) shouldBe 1
@@ -41,7 +41,7 @@ class ResponseToResultTest extends AsyncFlatSpec with Matchers {
 
   "tolerantResponseToResult" should "tolerate errors from response" in {
     tolerantResponseToResult.apply(Future.failed(new Exception("some forced exception")))
-      .map(_ shouldEqual implicitly[Monoid[StatusCodeCount]].identity)
+      .map(_.result shouldEqual implicitly[Monoid[StatusCodeCount]].identity)
   }
 
   it should "tolerate errors from processor" in {
@@ -53,6 +53,6 @@ class ResponseToResultTest extends AsyncFlatSpec with Matchers {
 
     val urlResponse = UrlResponse(domain, response)
     underTest.apply(Future.successful(urlResponse))
-        .map(_ shouldEqual implicitly[Monoid[Int]].identity)
+        .map(_.result shouldEqual implicitly[Monoid[Int]].identity)
   }
 }
