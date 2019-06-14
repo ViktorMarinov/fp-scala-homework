@@ -3,7 +3,7 @@ package homework3
 import java.util.concurrent.ForkJoinPool
 
 import homework3.http.AsyncHttpClient
-import homework3.processors.{BrokenLinkDetector, FileOutput, WordCount, WordCounter}
+import homework3.processors._
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext}
@@ -51,11 +51,11 @@ object SpideyApp {
     else {
 
       val url = args(0)
-//      val maxDepth = args(1).toInt
-      val maxDepth = 1
+      val maxDepth = args(1).toInt
 
-//      val processor = WordCounter
-//      val processor = BrokenLinkDetector
+//    val processor = WordCounter
+//    val processor = BrokenLinkDetector
+//    val processor = StatusCodeCounter
       val processor = new FileOutput("/tmp/3-spiders-from-mars")(blockingExecutionContext)
 
 
