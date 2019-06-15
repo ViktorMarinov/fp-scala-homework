@@ -1,12 +1,12 @@
 package homework3
 
+import cats.data.Chain
 import homework3.helpers._
 import homework3.http._
 import homework3.math.Monoid
 import homework3.math.Monoid.ops._
 
 import scala.concurrent.{ExecutionContext, Future}
-import scala.util.Success
 
 case class SpideyConfig(maxDepth: Int,
                         sameDomainOnly: Boolean = true,
@@ -26,31 +26,32 @@ class Spidey(httpClient: HttpClient)(implicit ex: ExecutionContext) {
     val responseToResult: ResponseToResult[O] = ResponseToResult.create(processor, config)
     val linkExtractor = LinkExtractor.create(config)
 
-    def crawlRec(urls: Seq[String], maxDepth: Int, visited: Set[String]): Future[Seq[O]] = {
-      val futureResponses = urls.map(urlToResponse.apply)
-      // can have failed futures
+    def processUrl =
+      urlToResponse.apply _ andThen responseToResult.apply
 
-      val futureProcessorResults = futureResponses.map(responseToResult.apply)
-      // if tolerant failed futures return identity result
-      val resultsFuture = Future.sequence(futureProcessorResults)
+    def traverse(urls: Seq[String], maxDepth: Int, accResults: Chain[O] = Chain.empty, visited: Set[String] = Set.empty): Future[Chain[O]] = {
 
-      val nextLevelResults = if (maxDepth > 0) {
-        resultsFuture.map(_.map {
-          case SuccessResult(url , response, _) => linkExtractor(url, response)
-          case _ => Nil
-        })
-          .map(_.flatten.distinct.filterNot(visited))
-          .flatMap(links =>
-            crawlRec(links, maxDepth - 1, visited ++ links))
-      } else {
-        Future.successful(Nil)
+      val fResults = Future.sequence(urls.map(processUrl))
+
+      fResults.flatMap { readyResults =>
+        val newAccResults = accResults ++ Chain.fromSeq(readyResults.map(_.result))
+
+        if (maxDepth <= 0 || readyResults.isEmpty)
+          Future.successful(newAccResults)
+        else {
+          val nextLinks = readyResults.flatMap {
+            case SuccessResult(url, response, _) => linkExtractor(url, response)
+            case _ => Nil
+          }.distinct.filterNot(visited)
+
+          traverse(nextLinks, maxDepth - 1, newAccResults, visited ++ nextLinks)
+        }
       }
-
-      val results = resultsFuture.map(_.map(_.result))
-      results.zipWith(nextLevelResults)(_ ++ _)
     }
 
-    crawlRec(Seq(url), config.maxDepth, Set(url))
-      .map(_.foldLeft(implicitly[Monoid[O]].identity)(_ |+| _))
+    val monoidIdentity = implicitly[Monoid[O]].identity
+    traverse(Seq(url), config.maxDepth, visited = Set(url)).map { results =>
+      results.foldLeft(monoidIdentity)(_ |+| _)
+    }
   }
 }

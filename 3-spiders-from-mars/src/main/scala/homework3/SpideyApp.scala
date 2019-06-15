@@ -54,9 +54,9 @@ object SpideyApp {
       val maxDepth = args(1).toInt
 
 //    val processor = WordCounter
-//    val processor = BrokenLinkDetector
+    val processor = BrokenLinkDetector
 //    val processor = StatusCodeCounter
-      val processor = new FileOutput("/tmp/3-spiders-from-mars")(blockingExecutionContext)
+//      val processor = new FileOutput("/tmp/3-spiders-from-mars")(blockingExecutionContext)
 
 
       // run Spidey

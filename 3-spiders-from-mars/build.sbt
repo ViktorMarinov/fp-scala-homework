@@ -9,7 +9,7 @@ libraryDependencies ++= Seq(
   "org.jsoup" % "jsoup" % "1.12.1",
 
   "org.scalatest" %% "scalatest" % "3.0.5" % "test",
-  "org.scalamock" %% "scalamock" % "4.2.0" % Test
+  "org.typelevel" %% "cats-core" % "2.0.0-M4"
 )
 
 assemblyMergeStrategy in assembly := {
